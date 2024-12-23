@@ -27,6 +27,7 @@ pipeline {
                     echo "Deploying to Minikube"
                     sh 'kubectl apply -f k8s/apache-deployment.yaml'
                     sh 'kubectl apply -f k8s/apache-service.yaml'
+                    sh 'kubectl get pods'
                 }
             }
         }
