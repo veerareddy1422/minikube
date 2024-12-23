@@ -1,17 +1,12 @@
 pipeline {
     agent any
     environment {
-        DOCKER_IMAGE = "apache-app"  // Name of the Docker image
+        DOCKER_IMAGE = "apache-app"
     }
     stages {
         stage('Build Docker Image') {
             steps {
                 script {
-                    // Check Docker version
-                    sh 'docker --version'
-
-                    // Build the Docker image using the current directory
-                    echo "Building Docker image ${DOCKER_IMAGE}"
                     sh 'docker build -t ${DOCKER_IMAGE} .'
                 }
             }
@@ -20,7 +15,11 @@ pipeline {
         stage('Deploy to Minikube') {
             steps {
                 script {
-                    // Ensure kubectl is pointing to the Minikube context
+                    // Ensure Minikube is started
+                    echo "Starting Minikube if not already running"
+                    sh 'minikube start'  // Start Minikube if it's not running
+
+                    // Set kubectl context to Minikube
                     echo "Setting kubectl context to minikube"
                     sh 'kubectl config use-context minikube'
 
