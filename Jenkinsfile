@@ -7,11 +7,12 @@ pipeline {
         stage('Build Docker Image') {
             steps {
                 script {
-                    // Check if Docker is running
+                    // Check Docker version
                     sh 'docker --version'
+
                     // Build the Docker image using the current directory
                     echo "Building Docker image ${DOCKER_IMAGE}"
-                    docker.build("${DOCKER_IMAGE}", ".")  // Adjust path if Dockerfile is elsewhere
+                    sh 'docker build -t ${DOCKER_IMAGE} .'
                 }
             }
         }
