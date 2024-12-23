@@ -14,6 +14,6 @@ spec:
     spec:
       containers:
       - name: apache
-        image: veerareddy1422/ecomm  # This will be replaced with your image name
+        image: httpd
         ports:
         - containerPort: 80
